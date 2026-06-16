@@ -5,17 +5,17 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EdicaoCarroController {
+public class EdicaoResidenciaController {
     private Stage palco;
-    private final String CAMINHO_ARQUIVO = "src/dao/veiculos.txt";
+    private final String CAMINHO_ARQUIVO = "src/dao/residencias.txt";
 
-    public EdicaoCarroController(Stage palco) {
+    public EdicaoResidenciaController(Stage palco) {
         this.palco = palco;
     }
 
-    public void atualizarCarro(int indiceLinha, String novaMarca, String novaModelo, String novoAno, String novoTipo) {
+    public void atualizarResidencia(int indiceLinha, String cidade, String cep, String rua, String bairro, String numero, String complemento, String tipoResidencia) {
         File arquivo = new File(CAMINHO_ARQUIVO);
-        String novaLinha = novaMarca + " | " + novaModelo + " | " + novoAno + " | " + novoTipo;
+        String novaLinha = cidade + " | " + cep + " | " + rua + " | " + bairro + " | " + numero + " | " + complemento + " | " + tipoResidencia;
 
         List<String> linhasDoArquivo = new ArrayList<>();
 
@@ -40,13 +40,13 @@ public class EdicaoCarroController {
                 bw.newLine();
             }
             bw.flush();
-            System.out.println("Arquivo atualizado com sucesso no índice: " + indiceLinha);
+            System.out.println("Arquivo residencia.txt atualizado com sucesso no índice: " + indiceLinha);
         } catch (IOException e) {
             System.out.println("Erro ao atualizar arquivo");
             e.printStackTrace();
         }
 
-        view.TelaGetVeiculos telaLista = new view.TelaGetVeiculos(this.palco);
+        view.TelaGetResidencias telaLista = new view.TelaGetResidencias(this.palco);
         this.palco.setScene(telaLista.desenharTela());
     }
 }

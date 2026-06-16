@@ -44,19 +44,24 @@ public class TelaEditarCarro {
         formulario.setVgap(12);
         formulario.setPadding(new Insets(15));
 
+        Label lblMarca = new Label("Marca:");
         TextField txtMarca = new TextField(carroOriginal.getMarca());
-        formulario.add(new Label("Marca do carro:"), 0, 0);
+        formulario.add(lblMarca, 0, 0);
         formulario.add(txtMarca, 1, 0);
 
+        Label lblModelo = new Label("Modelo:");
         TextField txtModelo = new TextField(carroOriginal.getModelo());
-        formulario.add(new Label("Modelo:"), 0, 1);
+        formulario.add(lblModelo, 0, 1);
         formulario.add(txtModelo, 1, 1);
 
+
+        Label lblAno = new Label("Ano:");
         TextField txtAno = new TextField(carroOriginal.getAno());
         txtAno.setTextFormatter(new TextFormatter<>(change -> change.getText().matches("\\d*") ? change : null));
-        formulario.add(new Label("Ano:"), 0, 2);
+        formulario.add(lblAno, 0, 2);
         formulario.add(txtAno, 1, 2);
 
+        Label lblTipoCarro = new Label("Tipo de Carro:");
         ToggleGroup tipoCarro = new ToggleGroup();
         RadioButton carroSuv = new RadioButton("SUV"); carroSuv.setToggleGroup(tipoCarro);
         RadioButton carroEsportivo = new RadioButton("Esportivo"); carroEsportivo.setToggleGroup(tipoCarro);
@@ -70,7 +75,7 @@ public class TelaEditarCarro {
         else carroOutro.setSelected(true);
 
         HBox grupoRadio = new HBox(10, carroSuv, carroEsportivo, carroSeda, carroOutro);
-        formulario.add(new Label("Tipo do carro:"), 0, 3);
+        formulario.add(lblTipoCarro, 0, 3);
         formulario.add(grupoRadio, 1, 3);
 
         Button btnSalvar = new Button("Salvar Alterações");

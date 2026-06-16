@@ -28,7 +28,7 @@ public class CadastroCarroController {
             System.out.println("Carro cadastrado com sucesso: " + linha);
 
         } catch (IOException e) {
-            System.err.println("Erro ao salvar o carro no arquivo: " + e.getMessage());
+            System.out.println("Erro ao salvar o carro no arquivo veiculos.txt ");
             e.printStackTrace();
         }
 

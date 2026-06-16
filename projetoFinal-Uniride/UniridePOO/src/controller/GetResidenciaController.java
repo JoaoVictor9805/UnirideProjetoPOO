@@ -3,21 +3,20 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
-import model.Carro;
+import model.Residencia;
 
 import java.io.*;
-import java.util.Scanner;
 
-public class GetCarroController {
+public class GetResidenciaController {
     private Stage palco;
-    private final String CAMINHO_ARQUIVO = "src/dao/veiculos.txt";
+    private final String CAMINHO_ARQUIVO = "src/dao/residencias.txt";
 
-    public GetCarroController(Stage palco){
+    public GetResidenciaController(Stage palco){
         this.palco = palco;
     }
 
-    public ObservableList<Carro> carregarCarros(){
-        ObservableList<Carro> lista = FXCollections.observableArrayList();
+    public ObservableList<Residencia> carregarResidencias(){
+        ObservableList<Residencia> lista = FXCollections.observableArrayList();
         File arquivo  = new File(CAMINHO_ARQUIVO);
 
         if(!arquivo.exists()) return lista;
@@ -28,9 +27,9 @@ public class GetCarroController {
                 if (linha.trim().isEmpty()) continue;
 
                 String[] dados = linha.split("\\|");
-                if (dados.length == 4) {
-                    Carro carro = new Carro(dados[0], dados[1], dados[2].trim(), dados[3].trim());
-                    lista.add(carro);
+                if (dados.length == 7) {
+                    Residencia residencia = new Residencia(dados[0], dados[1], dados[2], dados[3], dados[4], dados[5], dados[6]);
+                    lista.add(residencia);
                 }
             }
         } catch (IOException e){
@@ -40,18 +39,18 @@ public class GetCarroController {
         return lista;
     }
 
-    public void excluirCarro(Carro carroParaExcluir, ObservableList<Carro> lista){
-        lista.remove(carroParaExcluir);
+    public void excluirResidencia(Residencia residenciaParaExcluir, ObservableList<Residencia> lista){
+        lista.remove(residenciaParaExcluir);
         try (FileWriter fw = new FileWriter(CAMINHO_ARQUIVO, false);
-        BufferedWriter bw = new BufferedWriter(fw)) {
-            for(Carro c : lista){
-                String linha = c.getMarca() + " | " + c.getModelo() + " | " + c.getAno() + " | " + c.getTipoCarroTexto();
+             BufferedWriter bw = new BufferedWriter(fw)) {
+            for(Residencia r : lista){
+                String linha = r.getCidade() + "|" + r.getCep() + "|" + r.getRua() + r.getBairro() + "|" + r.getNumero() +  "|" + r.getComplemento() + "|" + r.getTipoResidencia();
                 bw.write(linha);
                 bw.newLine();
             }
             bw.flush();
-            System.out.println("Carro excluido com sucesso!");
-    } catch (IOException e){
+            System.out.println("Residência excluída com sucesso!");
+        } catch (IOException e){
             System.out.println("Erro ao excluir arquivo");
             e.printStackTrace();
         }
