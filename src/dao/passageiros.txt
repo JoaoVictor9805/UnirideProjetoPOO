@@ -1,2 +1,0 @@
-Bruno Martins Parizotto;bruno@email.com;123456;2004-12-30
-bruno;bruno;123456;2004-12-30
