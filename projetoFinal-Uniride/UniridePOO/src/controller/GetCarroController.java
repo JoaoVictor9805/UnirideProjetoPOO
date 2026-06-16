@@ -40,21 +40,4 @@ public class GetCarroController {
         return lista;
     }
 
-    public void excluirCarro(Carro carroParaExcluir, ObservableList<Carro> lista){
-        lista.remove(carroParaExcluir);
-        try (FileWriter fw = new FileWriter(CAMINHO_ARQUIVO, false);
-        BufferedWriter bw = new BufferedWriter(fw)) {
-            for(Carro c : lista){
-                String linha = c.getMarca() + " | " + c.getModelo() + " | " + c.getAno() + " | " + c.getTipoCarroTexto();
-                bw.write(linha);
-                bw.newLine();
-            }
-            bw.flush();
-            System.out.println("Carro excluido com sucesso!");
-    } catch (IOException e){
-            System.out.println("Erro ao excluir arquivo");
-            e.printStackTrace();
-        }
-    }
-
 }

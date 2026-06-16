@@ -85,12 +85,17 @@ public class TelaEditarResidencia {
         formulario.add(comboTipoResidencia, 1, 6);
 
         Button btnSalvar = new Button("Salvar Alterações");
+        Button btnExcluir = new Button("Excluir");
         Button btnCancelar = new Button("Cancelar");
-        HBox linha = new HBox(9, btnSalvar, btnCancelar);
+        HBox linha = new HBox(9, btnSalvar, btnExcluir, btnCancelar);
         formulario.add(linha, 0, 7);
 
         btnSalvar.setOnAction(e -> {
             controller.atualizarResidencia(indiceLinha, txtCidade.getText(), txtCep.getText(), txtRua.getText(), txtBairro.getText(), txtNumero.getText(), txtComplemento.getText(),comboTipoResidencia.getValue());
+        });
+
+        btnExcluir.setOnAction(e -> {
+            controller.excluirResidencia(indiceLinha);
         });
 
         btnCancelar.setOnAction(e -> {

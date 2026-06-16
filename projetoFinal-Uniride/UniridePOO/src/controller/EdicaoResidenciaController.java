@@ -49,4 +49,34 @@ public class EdicaoResidenciaController {
         view.TelaGetResidencias telaLista = new view.TelaGetResidencias(this.palco);
         this.palco.setScene(telaLista.desenharTela());
     }
+
+    public void excluirResidencia(int indiceLinha) {
+        File arquivo = new File(CAMINHO_ARQUIVO);
+        List<String> linhasDoArquivo = new ArrayList<>();
+        try (FileReader fr = new FileReader(arquivo);
+             BufferedReader br = new BufferedReader(fr)) {
+            String linha;
+            int contador = 0;
+            while ((linha = br.readLine()) != null) {
+                if (contador != indiceLinha) {
+                    linhasDoArquivo.add(linha);
+                }
+                contador++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try (FileWriter fw = new FileWriter(arquivo, false);
+             BufferedWriter bw = new BufferedWriter(fw)) {
+            for (String l : linhasDoArquivo) {
+                bw.write(l);
+                bw.newLine();
+            }
+            bw.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        view.TelaGetResidencias telaLista = new view.TelaGetResidencias(this.palco);
+        this.palco.setScene(telaLista.desenharTela());
+    }
 }

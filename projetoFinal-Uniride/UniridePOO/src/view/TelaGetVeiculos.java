@@ -51,18 +51,12 @@ public class TelaGetVeiculos {
             @Override
             public TableCell<Carro, Void> call(final TableColumn<Carro, Void> param) {
                 return new TableCell<>() {
-                    private final Button btnEditar = new Button("Editar");
-                    private final Button btnExcluir = new Button("Excluir");
-                    private final HBox painelBotoes = new HBox(10, btnEditar, btnExcluir);
+                    private final Button btnConsultar = new Button("Consultar");
+                    private final HBox painelBotoes = new HBox(10, btnConsultar);
 
                     {
                         painelBotoes.setAlignment(Pos.CENTER);
-                         btnExcluir.setOnAction(e -> {
-                             Carro carroSelecionado = getTableView().getItems().get(getIndex());
-                             controller.excluirCarro(carroSelecionado, getTableView().getItems());
-                         });
-
-                         btnEditar.setOnAction(e -> {
+                         btnConsultar.setOnAction(e -> {
                              Carro carroSelecionado = getTableView().getItems().get(getIndex());
                              int numLinha = getIndex();
                              TelaEditarCarro telaEdicao = new TelaEditarCarro(TelaGetVeiculos.this.palco, carroSelecionado, numLinha);

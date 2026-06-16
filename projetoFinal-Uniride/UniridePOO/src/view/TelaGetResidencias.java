@@ -60,18 +60,12 @@ public class TelaGetResidencias {
             @Override
             public TableCell<Residencia, Void> call(final TableColumn<Residencia, Void> param) {
                 return new TableCell<>() {
-                    private final Button btnEditar = new Button("Editar");
-                    private final Button btnExcluir = new Button("Excluir");
-                    private final HBox painelBotoes = new HBox(10, btnEditar, btnExcluir);
+                    private final Button btnConsultar = new Button("Consultar");
+                    private final HBox painelBotoes = new HBox(10, btnConsultar);
 
                     {
                         painelBotoes.setAlignment(Pos.CENTER);
-                        btnExcluir.setOnAction(e -> {
-                            Residencia residenciaSelecionada = getTableView().getItems().get(getIndex());
-                            controller.excluirResidencia(residenciaSelecionada, getTableView().getItems());
-                        });
-
-                        btnEditar.setOnAction(e -> {
+                        btnConsultar.setOnAction(e -> {
                             Residencia residenciaSelecionada = getTableView().getItems().get(getIndex());
                             int numLinha = getIndex();
                             TelaEditarResidencia telaEdicao = new TelaEditarResidencia(TelaGetResidencias.this.palco, residenciaSelecionada, numLinha);

@@ -39,21 +39,4 @@ public class GetResidenciaController {
         return lista;
     }
 
-    public void excluirResidencia(Residencia residenciaParaExcluir, ObservableList<Residencia> lista){
-        lista.remove(residenciaParaExcluir);
-        try (FileWriter fw = new FileWriter(CAMINHO_ARQUIVO, false);
-             BufferedWriter bw = new BufferedWriter(fw)) {
-            for(Residencia r : lista){
-                String linha = r.getCidade() + "|" + r.getCep() + "|" + r.getRua() + r.getBairro() + "|" + r.getNumero() +  "|" + r.getComplemento() + "|" + r.getTipoResidencia();
-                bw.write(linha);
-                bw.newLine();
-            }
-            bw.flush();
-            System.out.println("Residência excluída com sucesso!");
-        } catch (IOException e){
-            System.out.println("Erro ao excluir arquivo");
-            e.printStackTrace();
-        }
-    }
-
 }

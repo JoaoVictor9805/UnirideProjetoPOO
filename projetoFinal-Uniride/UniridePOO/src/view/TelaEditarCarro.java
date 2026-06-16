@@ -16,9 +16,8 @@ public class TelaEditarCarro {
     private Stage palco;
     private EdicaoCarroController controller;
     private Carro carroOriginal;
-    private int indiceLinha; // Guardamos o índice aqui
+    private int indiceLinha;
 
-    // Construtor atualizado para receber o carro E a posição dele na tabela
     public TelaEditarCarro(Stage palco, Carro carro, int indiceLinha) {
         this.palco = palco;
         this.carroOriginal = carro;
@@ -33,7 +32,7 @@ public class TelaEditarCarro {
         header.setStyle("-fx-background-color: #2c3e50;");
         header.setAlignment(Pos.CENTER);
 
-        Label tituloTela = new Label("Editar Veículo");
+        Label tituloTela = new Label("Consulta de Veículo");
         tituloTela.setFont(new Font("Arial", 22));
         tituloTela.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
         header.getChildren().add(tituloTela);
@@ -79,8 +78,9 @@ public class TelaEditarCarro {
         formulario.add(grupoRadio, 1, 3);
 
         Button btnSalvar = new Button("Salvar Alterações");
-        Button btnCancelar = new Button("Cancelar");
-        HBox linha = new HBox(9, btnSalvar, btnCancelar);
+        Button btnExcluir = new Button("Excluir");
+        Button btnCancelar = new Button("Voltar");
+        HBox linha = new HBox(9, btnSalvar, btnExcluir, btnCancelar);
         formulario.add(linha, 0, 4);
 
         btnSalvar.setOnAction(e -> {
@@ -93,6 +93,10 @@ public class TelaEditarCarro {
         btnCancelar.setOnAction(e -> {
             TelaGetVeiculos lista = new TelaGetVeiculos(this.palco);
             this.palco.setScene(lista.desenharTela());
+        });
+
+        btnExcluir.setOnAction(e -> {
+            controller.excluirCarro(indiceLinha);
         });
 
         layoutPrincipal.setTop(header);
