@@ -34,7 +34,7 @@ public class TelaEditarResidencia {
         header.setStyle("-fx-background-color: #2c3e50;");
         header.setAlignment(Pos.CENTER);
 
-        Label tituloTela = new Label("Editar Residência");
+        Label tituloTela = new Label("Consulta de residência");
         tituloTela.setFont(new Font("Arial", 22));
         tituloTela.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
         header.getChildren().add(tituloTela);
