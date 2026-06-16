@@ -85,7 +85,7 @@ public class TelaGetVeiculos {
         acoes.setCellFactory(cellFactory);
 
         table.getColumns().addAll(marca, modelo, ano, tipoCarroTexto, acoes);
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         Label labelSemDados = new Label("Nenhum dado encontrado");
         labelSemDados.setFont(new Font("Arial", 20));
