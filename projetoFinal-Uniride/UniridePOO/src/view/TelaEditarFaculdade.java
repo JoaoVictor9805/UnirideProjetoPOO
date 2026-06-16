@@ -32,7 +32,7 @@ public class TelaEditarFaculdade {
         header.setStyle("-fx-background-color: #2c3e50;");
         header.setAlignment(Pos.CENTER);
 
-        Label tituloTela = new Label("Editar Faculdade");
+        Label tituloTela = new Label("Consulta de Faculdade");
         tituloTela.setFont(new Font("Arial", 22));
         tituloTela.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
         header.getChildren().add(tituloTela);
@@ -72,24 +72,24 @@ public class TelaEditarFaculdade {
         formulario.add(grupoRadio, 1, 2);
 
         Button btnSalvar   = new Button("Salvar Alterações");
-        Button btnCancelar = new Button("Cancelar");
-        HBox linhaBotoes = new HBox(9, btnSalvar, btnCancelar);
+        Button btnExcluir  = new Button("Excluir");
+        Button btnCancelar = new Button("Voltar");
+        HBox linhaBotoes = new HBox(9, btnSalvar, btnExcluir, btnCancelar);
         formulario.add(linhaBotoes, 0, 3);
 
         btnSalvar.setOnAction(e -> {
             Toggle tgTurno = grupoTurno.getSelectedToggle();
             String turno   = (tgTurno != null) ? ((RadioButton) tgTurno).getText() : "";
-            controller.atualizarFaculdade(
-                    indiceLinha,
-                    txtNome.getText(),
-                    txtCidade.getText(),
-                    turno
-            );
+            controller.atualizarFaculdade(indiceLinha, txtNome.getText(), txtCidade.getText(), turno);
         });
 
         btnCancelar.setOnAction(e -> {
             TelaGetFaculdades lista = new TelaGetFaculdades(this.palco);
             this.palco.setScene(lista.desenharTela());
+        });
+
+        btnExcluir.setOnAction(e -> {
+            controller.excluirFaculdade(indiceLinha);
         });
 
         layoutPrincipal.setTop(header);

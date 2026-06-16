@@ -6,7 +6,6 @@ import javafx.stage.Stage;
 import model.Faculdade;
 
 import java.io.*;
-import java.util.Scanner;
 
 public class GetFaculdadeController {
     private Stage palco;
@@ -30,9 +29,9 @@ public class GetFaculdadeController {
                 String[] dados = linha.split("\\|");
                 if (dados.length == 3) {
                     Faculdade faculdade = new Faculdade(
-                            dados[0].trim(), // nome
-                            dados[1].trim(), // cidade
-                            dados[2].trim()  // turno
+                            dados[0].trim(),
+                            dados[1].trim(),
+                            dados[2].trim()
                     );
                     lista.add(faculdade);
                 }
@@ -42,20 +41,5 @@ public class GetFaculdadeController {
             e.printStackTrace();
         }
         return lista;
-    }
-    public void excluirFaculdade(Faculdade faculdadeParaExcluir, ObservableList<Faculdade> lista) {
-        lista.remove(faculdadeParaExcluir);
-        try (FileWriter fw = new FileWriter(CAMINHO_ARQUIVO, false);
-             BufferedWriter bw = new BufferedWriter(fw)) {
-            for (Faculdade f : lista) {
-                String linha = f.getNome() + " | " + f.getCidade() + " | " + f.getTurno();
-                bw.write(linha);
-                bw.newLine();
-            }
-            bw.flush();
-            System.out.println("Faculdade excluída com sucesso!");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -27,7 +27,7 @@ public class TelaGetFaculdades {
     public Scene desenharTela() {
         VBox layout = new VBox(20);
         layout.setAlignment(Pos.TOP_CENTER);
-        layout.setStyle("-fx-background-color: #2c3e50;"); // fundo escuro — igual ao Veículos
+        layout.setStyle("-fx-background-color: #2c3e50;");
         layout.setPadding(new Insets(20));
 
         Label titulo = new Label("Faculdades cadastradas");
@@ -44,41 +44,28 @@ public class TelaGetFaculdades {
         colTurno.setCellValueFactory(new PropertyValueFactory<>("turno"));
 
         TableColumn<Faculdade, Void> colAcoes = new TableColumn<>("Ações");
-
         Callback<TableColumn<Faculdade, Void>, TableCell<Faculdade, Void>> cellFactory = new Callback<>() {
             @Override
             public TableCell<Faculdade, Void> call(final TableColumn<Faculdade, Void> param) {
-
                 return new TableCell<>() {
-                    private final Button btnEditar  = new Button("Editar");
-                    private final Button btnExcluir = new Button("Excluir");
-                    private final HBox painelBotoes = new HBox(10, btnEditar, btnExcluir);
+                    private final Button btnConsultar = new Button("Consultar");
+                    private final HBox painelBotoes = new HBox(10, btnConsultar);
 
                     {
                         painelBotoes.setAlignment(Pos.CENTER);
-                        btnExcluir.setOnAction(e -> {
-                            Faculdade faculdadeSelecionada = getTableView().getItems().get(getIndex());
-                            controller.excluirFaculdade(faculdadeSelecionada, getTableView().getItems());
-                        });
-
-                        btnEditar.setOnAction(e -> {
+                        btnConsultar.setOnAction(e -> {
                             Faculdade faculdadeSelecionada = getTableView().getItems().get(getIndex());
                             int numLinha = getIndex();
-                            TelaEditarFaculdade telaEdicao = new TelaEditarFaculdade(
-                                    TelaGetFaculdades.this.palco,
-                                    faculdadeSelecionada,
-                                    numLinha
-                            );
+                            TelaEditarFaculdade telaEdicao = new TelaEditarFaculdade(TelaGetFaculdades.this.palco, faculdadeSelecionada, numLinha);
                             TelaGetFaculdades.this.palco.setScene(telaEdicao.desenharTela());
                         });
                     }
-
                     @Override
                     public void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);
-                        if (empty) {
+                        if (empty){
                             setGraphic(null);
-                        } else {
+                        } else  {
                             setGraphic(painelBotoes);
                         }
                     }
@@ -102,7 +89,6 @@ public class TelaGetFaculdades {
         caixaBotoesMenu.setAlignment(Pos.CENTER);
 
         Button btnVoltar    = new Button("Voltar para o Menu");
-
         Button btnCadastrar = new Button("Cadastrar Nova");
 
         btnVoltar.setOnAction(evento -> {
