@@ -16,6 +16,23 @@ public class EdicaoCarroController {
     }
 
     public void atualizarCarro(int indiceLinha, String novaMarca, String novaModelo, String novoAno, String novoTipo) {
+        if (novaMarca.trim().isEmpty() || novaModelo.trim().isEmpty() || novoAno.trim().isEmpty()) {
+            javafx.scene.control.Alert alerta = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
+            alerta.setTitle("Aviso");
+            alerta.setHeaderText("Campos Obrigatórios!");
+            alerta.setContentText("A marca, o modelo e o ano do veículo não podem ficar em branco.");
+            alerta.showAndWait();
+            return;
+        }
+        int anoInt = Integer.parseInt(novoAno);
+        if (anoInt < 1900 || anoInt > 2026){
+            javafx.scene.control.Alert alerta = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
+            alerta.setTitle("Aviso");
+            alerta.setHeaderText("Campo inválido!");
+            alerta.setContentText("Ano acima de 1900 e abaixo de 2027");
+            alerta.showAndWait();
+            return;
+        }
         File arquivo = new File(CAMINHO_ARQUIVO);
         String novaLinha = novaMarca + " | " + novaModelo + " | " + novoAno + " | " + novoTipo;
 

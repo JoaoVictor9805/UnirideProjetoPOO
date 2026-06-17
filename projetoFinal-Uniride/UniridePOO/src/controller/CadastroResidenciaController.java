@@ -15,6 +15,14 @@ public class CadastroResidenciaController {
     }
 
     public void salvarResidencia(String cidade, String cep, String rua, String bairro, String numero, String complemento, String tipoResidencia) {
+        if (cidade.trim().isEmpty() || cep.trim().isEmpty() || rua.trim().isEmpty() || numero.trim().isEmpty()) {
+            javafx.scene.control.Alert alerta = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
+            alerta.setTitle("Aviso");
+            alerta.setHeaderText("Campos Obrigatórios!");
+            alerta.setContentText("Cidade, CEP, rua, bairro e número não podem ficar em branco.");
+            alerta.showAndWait();
+            return;
+        }
         File arquivo = new File(CAMINHO_ARQUIVO);
 
         try (FileWriter fw = new FileWriter(arquivo, true);
